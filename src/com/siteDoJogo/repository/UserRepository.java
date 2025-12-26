@@ -11,42 +11,61 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class UserRepository {
-    private List<SimpleUser> userRepository = new ArrayList<>();
-
+    private final List<SimpleUser> userRepository = new ArrayList<>();
 
     public UserRepository() {
+
+        Path path = Path.of("database/users.txt");
+
+        try(Scanner scanner = new Scanner(path)) {
+
+            while (scanner.hasNextLine()) {
+                var teste = scanner.nextLine().split(",");
+                userRepository.add(new SimpleUser(Long.parseLong(teste[0]),teste[1],teste[2]));
+            }
+
+
+
+        } catch (IOException e) {
+            System.out.println("Aquivo ainda não foi criado");
+        }
+
     }
 
+
     public void addUser(String login, String password) {
+
+
         userRepository.add(
                 new SimpleUser(
                         login,
                         password));
     }
 
-    public UserRepository(String userRepository) {
-        try (Scanner scanner = new Scanner(Path.of("database/users.json"))) {
 
-            var teste = scanner.tokens();
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public List<SimpleUser> getUserRepository() {
+        return userRepository;
     }
 
-    public void writeJson() {
+    public void writeFile() {
 
         try {
 
-            Path path = Path.of("src/com/siteDoJogo/database/users.json");
+            Path path = Path.of("database/users.txt");
+
+            // apagar depois que melhorar a logica de repetição
+            //            try {
+//                Files.deleteIfExists(path);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
 
             Files.createDirectories(path.getParent());
 
             Files.writeString(path,
                     userRepository.stream()
-                            .map(SimpleUser::toJSON)
-                            .collect(Collectors.joining(",","[","]")));
+                            .map(SimpleUser::write)
+                            .collect(Collectors.joining("\n")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

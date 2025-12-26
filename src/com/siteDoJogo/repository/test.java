@@ -1,5 +1,7 @@
 package com.siteDoJogo.repository;
 
+import com.siteDoJogo.model.SimpleUser;
+
 public class test {
     public static void main(String[] args) {
 
@@ -9,9 +11,16 @@ public class test {
         user.addUser("rato", "123456");
         user.addUser("voce", "123456");
 
-        user.writeJson();
+        user.writeFile();
 
 
+
+       var aqui =  user.getUserRepository();
+
+       for (SimpleUser usuario : aqui) {
+           System.out.println(usuario.getLogin() +
+                   usuario.getId() + usuario.getPassword());
+       }
     }
 
 
