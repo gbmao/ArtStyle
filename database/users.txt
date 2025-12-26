@@ -1,12 +1,3 @@
 0,gabriel,123456
 0,rato,123456
 0,voce,123456
-0,gabriel,123456
-0,rato,123456
-0,voce,123456
-0,gabriel,123456
-0,rato,123456
-0,voce,123456
-0,gabriel,123456
-0,rato,123456
-0,voce,123456

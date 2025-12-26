@@ -1,6 +1,7 @@
 package com.siteDoJogo.repository;
 
 import com.siteDoJogo.model.SimpleUser;
+import com.siteDoJogo.util.UsersValidator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +14,9 @@ import java.util.stream.Collectors;
 public class UserRepository {
     private final List<SimpleUser> userRepository = new ArrayList<>();
 
+
     public UserRepository() {
+
 
         Path path = Path.of("database/users.txt");
 
@@ -35,16 +38,21 @@ public class UserRepository {
 
     public void addUser(String login, String password) {
 
+        UsersValidator usersValidator = new UsersValidator(getUserRepository());
+
+        if(usersValidator.validateNewUser(login,password)) {
 
         userRepository.add(
                 new SimpleUser(
                         login,
                         password));
+        }
+
     }
 
 
     public List<SimpleUser> getUserRepository() {
-        return userRepository;
+        return List.copyOf(userRepository);
     }
 
     public void writeFile() {
