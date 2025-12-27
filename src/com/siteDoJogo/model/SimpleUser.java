@@ -3,11 +3,13 @@ package com.siteDoJogo.model;
 import java.util.StringJoiner;
 
 public class SimpleUser {
-    private Long id = 0L;
+    private static long totalId = 1L;
+    private Long id;
     private String login;
     private String password;
 
     public SimpleUser(String login, String password) {
+        this.id = totalId++;
         this.login = login.toLowerCase();
         this.password = password;
     }
@@ -17,6 +19,7 @@ public class SimpleUser {
         this.id = id;
         this.login = login;
         this.password = password;
+        totalId++;
     }
 
     public Long getId() {

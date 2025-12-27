@@ -28,5 +28,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-!**/src/com/siteDoJogo/repository/test.java
 .env
+
+
+src/com/siteDoJogo/repository/test.java

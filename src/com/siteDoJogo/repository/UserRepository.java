@@ -1,8 +1,11 @@
 package com.siteDoJogo.repository;
 
 import com.siteDoJogo.model.SimpleUser;
+import com.siteDoJogo.security.util.Encode;
+import com.siteDoJogo.security.util.EnvLoader;
 import com.siteDoJogo.util.UsersValidator;
 
+import java.beans.Encoder;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,7 +48,10 @@ public class UserRepository {
         userRepository.add(
                 new SimpleUser(
                         login,
-                        password));
+                        Encode.encodePassword(EnvLoader.envLoaderVariable(
+                                        "PASSWORD_KEY"),
+                                EnvLoader.envLoaderVariable("PASSWORD_HOME"),
+                                password)));
         }
 
     }
