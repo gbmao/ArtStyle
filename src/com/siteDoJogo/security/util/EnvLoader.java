@@ -3,11 +3,10 @@ package com.siteDoJogo.security.util;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 public class EnvLoader {
 
-    public static String EnvLoaderVariable(String variable) {
+    public static String envLoaderVariable(String variable) {
 
         Path path = Path.of(".env");
 
