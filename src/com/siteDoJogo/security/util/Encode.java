@@ -5,6 +5,8 @@ public class Encode {
 
     public static String encodePassword(String passwordKey, String home, String password) {
 
+        // talvez utilizar o Id para gerar algo mais aleatorio?
+
         var key = EnvLoader.envLoaderVariable(passwordKey);
         var homeKey = EnvLoader.envLoaderVariable(home);
 
@@ -35,6 +37,7 @@ public class Encode {
             for (int j = 0; j < key.length(); j++) {
                 if(c == key.charAt(j)) {
                     result.append(homeKey.charAt(j));
+                    break;
                 }
             }
         }
